@@ -62,3 +62,31 @@ storms %>%
   scale_fill_paletteer_d("ggthemes::Green_Orange_Teal")
 ```
 
+## One spatial data example
+
+```{r}
+vegetation <- read_sf("doc.kml") %>% 
+  select(Name) %>% 
+  clean_names()
+
+#create a map using ggplot
+
+#Update theme to theme minimal
+#Fill color change nased on the vegetation
+# color of line to NA (color = NA)
+
+ggplot(data = vegetation) +
+  geom_sf(aes(fill = name), color = NA) +
+  theme_minimal() +
+  scale_fill_paletteer_d("ggthemes::manyeys") +
+  labs(title = "Jornada Basin LTER Vegetation",
+       caption = "Source: Jornada LTER")
+  
+
+```
+
+```{r}
+ggsave(filename = "my_awesome_map.jpg", width = 8, height = 5)
+```
+
+
